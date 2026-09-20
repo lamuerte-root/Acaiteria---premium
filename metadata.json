@@ -1,0 +1,6 @@
+{
+  "name": "Acaiteria Premium",
+  "description": "Site profissional e delivery da Acaiteria Premium, especializada no verdadeiro açaí artesanal, combos exclusivos e monte seu açaí.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

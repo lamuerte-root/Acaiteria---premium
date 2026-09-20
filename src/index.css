@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --acai-950: #260014;
+    --acai-900: #3d0221;
+    --acai-800: #54042e;
+    --acai-700: #6b073b;
+    --acai-600: #880c4d;
+    --acai-500: #a71461;
+    --gold-500: #f59e0b;
+    --gold-400: #fbbf24;
+    --gold-300: #fde047;
+  }
+}
+
+/* Custom subtle fruit watermark pattern for light sections */
+.bg-fruit-pattern {
+  background-color: #faf6f9;
+  background-image: radial-gradient(rgba(107, 7, 59, 0.05) 1px, transparent 1px), radial-gradient(rgba(107, 7, 59, 0.05) 1px, #faf6f9 1px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #260014;
+}
+::-webkit-scrollbar-thumb {
+  background: #6b073b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
