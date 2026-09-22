@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShoppingBag, Star, Plus, Check } from 'lucide-react';
-import { COMBOS_DATA } from '../data/products';
+import { useAdminProducts } from '../admin/productStore';
 import { ProductItem } from '../types';
 
 interface CombosSectionProps {
@@ -9,6 +9,7 @@ interface CombosSectionProps {
 }
 
 export const CombosSection: React.FC<CombosSectionProps> = ({ onAddToCart, onOpenCart }) => {
+  const combos = useAdminProducts().filter((p) => p.active !== false && p.category !== 'promo');
   return (
     <section id="combos" className="py-16 md:py-24 bg-fruit-pattern relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,7 +30,7 @@ export const CombosSection: React.FC<CombosSectionProps> = ({ onAddToCart, onOpe
 
         {/* 4 Cards Grid - Matches the purple rounded square cards in the reference image */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
-          {COMBOS_DATA.map((combo) => (
+          {combos.map((combo) => (
             <div
               key={combo.id}
               id={`card-${combo.id}`}
