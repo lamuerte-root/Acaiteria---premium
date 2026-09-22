@@ -65,15 +65,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCustomizer, onOpenCart }) 
                 <a href="#combos" className="hover:text-white transition-colors">Nossos Combos</a>
               </li>
               <li>
-                <a href="#promocoes" className="hover:text-white transition-colors">Promoções do Dia</a>
-              </li>
-              <li>
                 <button onClick={onOpenCustomizer} className="hover:text-[#fbbf24] transition-colors cursor-pointer text-left">
                   Monte seu Açaí
                 </button>
               </li>
               <li>
-                <a href="#sobre" className="hover:text-white transition-colors">Nossa História</a>
+                <a href="#contato" className="hover:text-white transition-colors">Contato & Atendimento</a>
               </li>
             </ul>
           </div>

@@ -1,34 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Clock, Menu, X, Phone, Flame, ChevronRight } from 'lucide-react';
+import { ShoppingBag, Clock, Menu, X, Phone, Flame, ChevronRight, Bike } from 'lucide-react';
 import { CartItem } from '../types';
 
 interface NavbarProps {
   cart: CartItem[];
   onOpenCart: () => void;
   onOpenCustomizer: () => void;
+  onOpenTracking: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ cart, onOpenCart, onOpenCustomizer }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+export const Navbar: React.FC<NavbarProps> = ({
+  cart,
+  onOpenCart,
+  onOpenCustomizer,
+  onOpenTracking,
+}) => {
+  const [isAtTop, setIsAtTop] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const atTop = window.scrollY <= 30;
+      setIsAtTop(atTop);
+      if (!atTop && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileMenuOpen]);
 
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  const isVisible = isAtTop || mobileMenuOpen;
 
   return (
     <header
       id="main-header"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[#3b011f]/95 backdrop-blur-md shadow-xl py-3 border-b border-[#70073e]/40'
-          : 'bg-[#430224] py-4'
+      className={`fixed top-0 left-0 right-0 z-50 bg-[#3b011f]/95 backdrop-blur-md shadow-xl py-3 sm:py-4 border-b border-[#70073e]/40 transition-all duration-500 ease-in-out ${
+        isVisible
+          ? 'translate-y-0 opacity-100 pointer-events-auto'
+          : '-translate-y-full opacity-0 pointer-events-none'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -69,14 +81,6 @@ export const Navbar: React.FC<NavbarProps> = ({ cart, onOpenCart, onOpenCustomiz
             >
               Combos
             </a>
-            <a
-              id="nav-link-promocoes"
-              href="#promocoes"
-              className="text-sm font-semibold text-white/90 hover:text-[#fbbf24] transition-colors flex items-center gap-1"
-            >
-              <Flame className="w-3.5 h-3.5 text-[#fbbf24]" />
-              Promoções
-            </a>
             <button
               id="nav-link-monte-acai"
               onClick={onOpenCustomizer}
@@ -84,13 +88,14 @@ export const Navbar: React.FC<NavbarProps> = ({ cart, onOpenCart, onOpenCustomiz
             >
               Monte seu Açaí
             </button>
-            <a
-              id="nav-link-sobre"
-              href="#sobre"
-              className="text-sm font-semibold text-white/90 hover:text-[#fbbf24] transition-colors"
+            <button
+              id="nav-link-rastreio"
+              onClick={onOpenTracking}
+              className="text-sm font-semibold text-white/90 hover:text-[#fbbf24] transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              Sobre
-            </a>
+              <Bike className="w-4 h-4 text-[#fbbf24]" />
+              <span>Rastrear Pedido</span>
+            </button>
             <a
               id="nav-link-contato"
               href="#contato"
@@ -175,13 +180,6 @@ export const Navbar: React.FC<NavbarProps> = ({ cart, onOpenCart, onOpenCustomiz
           >
             Nossos Combos
           </a>
-          <a
-            href="#promocoes"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-base font-semibold text-white hover:text-[#fbbf24]"
-          >
-            Promoções
-          </a>
           <button
             onClick={() => {
               setMobileMenuOpen(false);
@@ -192,13 +190,19 @@ export const Navbar: React.FC<NavbarProps> = ({ cart, onOpenCart, onOpenCustomiz
             <span>Monte seu Açaí</span>
             <ChevronRight className="w-4 h-4" />
           </button>
-          <a
-            href="#sobre"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-base font-semibold text-white hover:text-[#fbbf24]"
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onOpenTracking();
+            }}
+            className="w-full text-left py-2 text-base font-bold text-white hover:text-[#fbbf24] flex items-center justify-between"
           >
-            Sobre Nós
-          </a>
+            <span className="flex items-center gap-2">
+              <Bike className="w-4 h-4 text-[#fbbf24]" />
+              <span>Rastrear Pedido</span>
+            </span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
           <a
             href="#contato"
             onClick={() => setMobileMenuOpen(false)}

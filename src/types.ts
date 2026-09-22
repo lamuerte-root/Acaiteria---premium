@@ -46,3 +46,19 @@ export interface CartItem {
   quantity: number;
   image?: string;
 }
+
+export type OrderTrackingStage = 'confirmado' | 'preparando' | 'saiu_entrega' | 'entregue';
+
+export interface ActiveOrderTracking {
+  id: string;
+  customerName: string;
+  customerPhone?: string;
+  deliveryType: 'delivery' | 'retirada';
+  deliveryAddress?: string;
+  neighborhood?: string;
+  paymentMethod?: string;
+  itemsSummary: string[];
+  total: number;
+  createdAtMs: number;
+  createdAtFormatted: string;
+}
