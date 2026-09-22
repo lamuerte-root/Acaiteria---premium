@@ -151,43 +151,7 @@ export const PromotionsSection: React.FC<PromotionsSectionProps> = ({ onAddToCar
             </div>
           </div>
 
-          {/* Right Callout: Matches "HMMM... NESSE CALOR O QUE MAIS COMBINA?" from reference */}
-          <div className="lg:col-span-4 bg-[#faf2f7] p-8 rounded-3xl border border-purple-200/70 text-center lg:text-left space-y-5">
-            <span className="text-4xl block">🍧</span>
-
-            <h3 className="text-2xl sm:text-3xl font-black text-[#4b0429] uppercase tracking-tight leading-tight">
-              HMMM... NESSE CALOR <br />
-              <span className="text-[#a2125f]">O QUE MAIS COMBINA?</span>
-            </h3>
-
-            <p className="text-stone-600 text-sm leading-relaxed">
-              Nada refresca mais do que o açaí da <strong>Açaiteria Premium</strong>. Nossas embalagens térmicas garantem que seu pedido chegue com a consistência cremosa intacta, sem virar líquido!
-            </p>
-
-            <ul className="space-y-2.5 text-xs text-stone-700 font-medium pt-1">
-              <li className="flex items-center gap-2">
-                <Truck className="w-4 h-4 text-[#8b0c4f] shrink-0" />
-                <span>Entrega grátis para compras acima de R$ 50,00</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-[#8b0c4f] shrink-0" />
-                <span>Tempo médio de entrega: 30 a 45 minutos</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#8b0c4f] shrink-0" />
-                <span>Embalagem lacrada com selo térmico de segurança</span>
-              </li>
-            </ul>
-
-            <div className="pt-2">
-              <button
-                id="btn-promo-callout-fazer-pedido"
-                onClick={onOpenCart}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#fbbf24] hover:bg-[#f59e0b] text-[#34001b] font-black text-sm uppercase tracking-wider shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
-              >
-                <span>Fazer Pedido</span>
-              </button>
-            </div>
+        </div>
           </div>
 
         </div>
