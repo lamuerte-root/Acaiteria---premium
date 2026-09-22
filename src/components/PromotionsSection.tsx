@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShoppingBag, Flame, Sparkles, Clock, Truck, ShieldCheck } from 'lucide-react';
-import { PROMOTIONS_DATA, HERO_ASSETS } from '../data/products';
+import { HERO_ASSETS } from '../data/products';
+import { useAdminProducts } from '../admin/productStore';
 import { ProductItem } from '../types';
 
 interface PromotionsSectionProps {
@@ -9,6 +10,9 @@ interface PromotionsSectionProps {
 }
 
 export const PromotionsSection: React.FC<PromotionsSectionProps> = ({ onAddToCart, onOpenCart }) => {
+  const promotions = useAdminProducts().filter((p) => p.active !== false && p.category === 'promo');
+  const promoSextou = promotions.find((p) => p.id === 'promo-sextou');
+  const promoBarca = promotions.find((p) => p.id === 'promo-barca');
   return (
     <section id="promocoes" className="py-16 md:py-20 bg-white relative border-y border-purple-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,7 +54,7 @@ export const PromotionsSection: React.FC<PromotionsSectionProps> = ({ onAddToCar
               </h3>
 
               <div className="text-xs text-[#fce7f3]/90 mb-4">
-                Qualquer combo 500ml do nosso cardápio por preço promocional hoje!
+                {promoSextou?.description || 'Qualquer combo 500ml do nosso cardápio por preço promocional hoje!'}
               </div>
 
               {/* Image */}
@@ -63,7 +67,7 @@ export const PromotionsSection: React.FC<PromotionsSectionProps> = ({ onAddToCar
                 />
                 <div className="absolute bottom-2 left-2 bg-[#320019]/90 px-3 py-1 rounded-lg backdrop-blur-sm border border-white/10">
                   <span className="text-[10px] text-white/70 block">QUALQUER COMBO 500ML</span>
-                  <span className="text-base font-black text-[#fbbf24]">POR R$ 19,90</span>
+                  <span className="text-base font-black text-[#fbbf24]">POR R$ {promoSextou?.price.toFixed(2).replace('.', ',') || '19,90'}</span>
                 </div>
               </div>
 
@@ -108,7 +112,7 @@ export const PromotionsSection: React.FC<PromotionsSectionProps> = ({ onAddToCar
               </h3>
 
               <div className="text-xs text-[#fce7f3]/90 mb-4">
-                Barca gigante com 10 adicionais fartos para reunir a família ou amigos.
+                {promoBarca?.description || 'Barca gigante com 10 adicionais fartos para reunir a família ou amigos.'}
               </div>
 
               {/* Image */}
@@ -121,7 +125,7 @@ export const PromotionsSection: React.FC<PromotionsSectionProps> = ({ onAddToCar
                 />
                 <div className="absolute bottom-2 left-2 bg-[#320019]/90 px-3 py-1 rounded-lg backdrop-blur-sm border border-white/10">
                   <span className="text-[10px] text-white/70 block">BARCA COMPLETA 1L + 10 ADICIONAIS</span>
-                  <span className="text-base font-black text-[#fbbf24]">POR R$ 42,00</span>
+                  <span className="text-base font-black text-[#fbbf24]">POR R$ {promoBarca?.price.toFixed(2).replace('.', ',') || '42,00'}</span>
                 </div>
               </div>
 
